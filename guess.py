@@ -2,8 +2,8 @@ from random import randint
 import time
 
 TIME_LIMIT = 60
-DEBUG_SECRET = None
-#DEBUG_SECRET = 42
+#DEBUG_SECRET = None
+DEBUG_SECRET = 42
 
 #elapsed = time.time() - start.time()
 
@@ -102,10 +102,13 @@ def time_challenge_mode(difficulty, max_attempts, random_number):
 game_type = game_selection_loop()
 difficulty = difficulty_selection_loop()
 max_attempts = attempts_map[difficulty]
-random_number = randint(1, difficulty_map[difficulty])
+if DEBUG_SECRET:
+    random_number = DEBUG_SECRET
+else:
+    random_number = randint(1, difficulty_map[difficulty])
 
 if game_type == 1:
-    classic_mode(game_type, difficulty, max_attempts, random_number)
+    classic_mode(difficulty, max_attempts, random_number)
 else:
     time_challenge_mode(difficulty, max_attempts, random_number)
 
