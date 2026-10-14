@@ -5,10 +5,6 @@ TIME_LIMIT = 60
 DEBUG_SECRET = None
 #DEBUG_SECRET = 42
 
-game_type = -1
-difficulty = -1
-
-
 #elapsed = time.time() - start.time()
 
 #Setup section that exists outside the gameloop
@@ -17,28 +13,36 @@ difficulty_map = {1: 50, 2: 100, 3: 500}
 attempts_map = {1: 10, 2: 8, 3: 10}
 
 start_time = time.time()
+
 #Game mode selection loop
-while True:
-    game_type = input("Welcome to the advanced number guessing game! "
-                      "Type the number of the game mode you would like to play:\n"
-                      "1. Classic Mode\n2. Time Trial Mode\nInput: ")
-    game_type = int(game_type.lower().strip())
-    if game_type in valid_game_modes:
-        break
-    else:
-        print("Invalid selection! Try again!\n\n")
+def game_selection_loop():
+    game_type = -1
+    while True:
+        game_type = input("Welcome to the advanced number guessing game! "
+                          "Type the number of the game mode you would like to play:\n"
+                          "1. Classic Mode\n2. Time Trial Mode\nInput: ")
+        game_type = int(game_type.lower().strip())
+        if game_type in valid_game_modes:
+            break
+        else:
+            print("Invalid selection! Try again!\n\n")
+    return game_type
 
 #Difficulty selection loop
-while True:
-    difficulty = input("Choose your desired difficulty:\n"
-                       "1. Easy\n2. Medium\n3. Hard\nInput: ")
-    difficulty = int(difficulty.lower().strip())
-    if difficulty in difficulty_map.keys():
-        break
-    else:
-        print("Invalid selection! Try again!\n\n")
+def difficulty_selection_loop():
+    difficulty = -1
+    while True:
+        difficulty = input("Choose your desired difficulty:\n"
+                           "1. Easy\n2. Medium\n3. Hard\nInput: ")
+        difficulty = int(difficulty.lower().strip())
+        if difficulty in difficulty_map.keys():
+            break
+        else:
+            print("Invalid selection! Try again!\n\n")
+    return difficulty
 
 #Classic Mode Loop. Takes in game parameters and begins a loop that tests user guesses.
+
 def classic_mode(game_type, difficulty, max_attempts, random_number):
     attempts_remaining = max_attempts
     while attempts_remaining > 0:
@@ -62,10 +66,12 @@ def classic_mode(game_type, difficulty, max_attempts, random_number):
     if attempts_remaining <= 0:
         print(f"You ran out of attempts! The secret number was {random_number} Try again!\n\n")
 
+#Game Setup: getting game type, difficulty, max attempts, and generating the random number
+game_type = game_selection_loop()
+difficulty = difficulty_selection_loop()
 max_attempts = attempts_map[difficulty]
 random_number = randint(1, difficulty_map[difficulty])
 
-print(game_type, difficulty, random_number)
 classic_mode(game_type, difficulty, max_attempts, random_number)
 
 
