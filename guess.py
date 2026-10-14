@@ -11,7 +11,7 @@ difficulty = -1
 
 #elapsed = time.time() - start.time()
 
-#Setup section that exists outside the gameloop
+#Declaring Maps and tuples for game mode checking. Difficulty map values are upper range of possible guesses, lower range is always 1
 valid_game_modes = (1, 2)
 difficulty_map = {1: 50, 2: 100, 3: 500}
 attempts_map = {1: 10, 2: 8, 3: 10}
