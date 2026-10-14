@@ -62,7 +62,6 @@ def classic_mode(game_type, difficulty, max_attempts, random_number):
 max_attempts = attempts_map[difficulty]
 random_number = randint(1, difficulty_map[difficulty])
 
-print(game_type, difficulty, random_number)
 if game_type == 1:
     classic_mode(game_type, difficulty, max_attempts, random_number)
 else:
