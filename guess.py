@@ -8,9 +8,6 @@ DEBUG_SECRET = None
 game_type = -1
 difficulty = -1
 
-
-#elapsed = time.time() - start.time()
-
 #Declaring Maps and tuples for game mode checking. Difficulty map values are upper range of possible guesses, lower range is always 1
 valid_game_modes = (1, 2)
 difficulty_map = {1: 50, 2: 100, 3: 500}
@@ -66,6 +63,10 @@ max_attempts = attempts_map[difficulty]
 random_number = randint(1, difficulty_map[difficulty])
 
 print(game_type, difficulty, random_number)
-classic_mode(game_type, difficulty, max_attempts, random_number)
+if game_type == 1:
+    classic_mode(game_type, difficulty, max_attempts, random_number)
+else:
+    #TODO create time trial game mode and replace this classic_mode placeholder with the correct function call
+    classic_mode(game_type, difficulty, max_attempts, random_number)
 
 
