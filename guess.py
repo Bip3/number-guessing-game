@@ -2,6 +2,7 @@ from random import randint
 import time
 
 TIME_LIMIT = 60
+#Uncomment the second debug secret to control the computer's number
 DEBUG_SECRET = None
 #DEBUG_SECRET = 42
 
@@ -13,6 +14,9 @@ ATTEMPTS_MAP = {1: 10, 2: 8, 3: 10}
 #Constants for reporting status in f strings
 GET_DIFFICULTY_NAME = {1: "Easy", 2: "Medium", 3: "Hard"}
 GET_GAME_MODE_NAME = {1: "Classic Mode", 2: "Time Trial Mode"}
+
+
+
 
 #Game mode selection loop
 def game_selection_loop():
@@ -97,6 +101,7 @@ def time_challenge_mode(difficulty, max_attempts, random_number):
         attempts_remaining -= 1
     if attempts_remaining <= 0:
         print(f"You ran out of attempts! The secret number was {random_number} Try again!\n\n")
+
 
 #Game Loop
 while True:
