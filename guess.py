@@ -10,14 +10,16 @@ VALID_GAME_MODES = (1, 2)
 DIFFICULTY_MAP = {1: 50, 2: 100, 3: 500}
 ATTEMPTS_MAP = {1: 10, 2: 8, 3: 10}
 
+#Constants for reporting status in f strings
+GET_DIFFICULTY_NAME = {1: "Easy", 2: "Medium", 3: "Hard"}
+GET_GAME_MODE_NAME = {1: "Classic Mode", 2: "Time Trial Mode"}
+
 #Game mode selection loop
 def game_selection_loop():
     game_type = -1
     while True:
-        game_type = input("Welcome to the advanced number guessing game! "
-                          "Type the number of the game mode you would like to play:\n"
+        game_type = input("Type the number of the game mode you would like to play:\n"
                           "1. Classic Mode\n2. Time Trial Mode\nInput: ")
-
         if game_type.isdigit() and int(game_type.lower().strip()) in VALID_GAME_MODES:
             game_type = int(game_type.lower().strip())
             break
@@ -29,7 +31,8 @@ def game_selection_loop():
 def difficulty_selection_loop():
     difficulty = -1
     while True:
-        difficulty = input("Choose your desired difficulty:\n"
+        difficulty = input("Welcome to the advanced number guessing game! "
+                           "Choose your desired difficulty:\n"
                            "1. Easy\n2. Medium\n3. Hard\nInput: ")
         if difficulty.isdigit() and int(difficulty.lower().strip()) in DIFFICULTY_MAP.keys():
             difficulty = int(difficulty.lower().strip())
@@ -43,7 +46,7 @@ def difficulty_selection_loop():
 def classic_mode(difficulty, max_attempts, random_number):
     attempts_remaining = max_attempts
     while attempts_remaining > 0:
-        user_guess = input(f"You have {attempts_remaining} attempts left!\n"
+        user_guess = input(f"You have {attempts_remaining} attempts left\n"
                            "Guess the secret number: ")
         if not user_guess.isdigit():
             print("Invalid input! Try again!\n\n")
@@ -69,7 +72,7 @@ def time_challenge_mode(difficulty, max_attempts, random_number):
     start_time = time.time()
 
     while attempts_remaining > 0:
-        user_guess = input(f"You have {attempts_remaining} attempts left!\n"
+        user_guess = input(f"You have {attempts_remaining} attempts left\n"
                            f"With {TIME_LIMIT - int(time.time() - start_time)} seconds remaining\n\n"
                            "Guess the secret number: ")
         if not user_guess.isdigit():
@@ -99,8 +102,9 @@ def time_challenge_mode(difficulty, max_attempts, random_number):
 while True:
 #Game Setup: getting game type, difficulty, max attempts, and generating the random number
     restart = False
-    game_type = game_selection_loop()
     difficulty = difficulty_selection_loop()
+    game_type = game_selection_loop()
+    print(f"Starting {GET_GAME_MODE_NAME[game_type]} at {GET_DIFFICULTY_NAME[difficulty]} difficulty\n")
     max_attempts = ATTEMPTS_MAP[difficulty]
     if DEBUG_SECRET:
         random_number = DEBUG_SECRET
