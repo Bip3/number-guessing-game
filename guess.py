@@ -24,7 +24,7 @@ def game_selection_loop():
     while True:
         game_type = input("Type the number of the game mode you would like to play:\n"
                           "1. Classic Mode\n2. Time Trial Mode\nInput: ")
-        if game_type.isdigit() and int(game_type.lower().strip()) in VALID_GAME_MODES:
+        if game_type.strip().isdigit() and int(game_type.lower().strip()) in VALID_GAME_MODES:
             game_type = int(game_type.lower().strip())
             break
         else:
@@ -38,7 +38,7 @@ def difficulty_selection_loop():
         difficulty = input("Welcome to the advanced number guessing game! "
                            "Choose your desired difficulty:\n"
                            "1. Easy\n2. Medium\n3. Hard\nInput: ")
-        if difficulty.isdigit() and int(difficulty.lower().strip()) in DIFFICULTY_MAP.keys():
+        if difficulty.strip().isdigit() and int(difficulty.lower().strip()) in DIFFICULTY_MAP.keys():
             difficulty = int(difficulty.lower().strip())
             break
         else:
