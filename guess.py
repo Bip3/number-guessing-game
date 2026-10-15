@@ -31,17 +31,13 @@ def difficulty_selection_loop():
     while True:
         difficulty = input("Choose your desired difficulty:\n"
                            "1. Easy\n2. Medium\n3. Hard\nInput: ")
-        difficulty = int(difficulty.lower().strip())
-        if difficulty in DIFFICULTY_MAP.keys():
-            break
-        else:
-            print("Invalid selection! Try again!\n\n")
         if difficulty.isdigit() and int(difficulty.lower().strip()) in DIFFICULTY_MAP.keys():
-            difficulty = int(game_type.lower().strip())
+            difficulty = int(difficulty.lower().strip())
             break
         else:
             print("Invalid selection! Try again!\n\n")
     return difficulty
+
 
 #Classic Mode Loop. Takes in game parameters and begins a loop that tests user guesses.
 def classic_mode(difficulty, max_attempts, random_number):
@@ -99,19 +95,34 @@ def time_challenge_mode(difficulty, max_attempts, random_number):
     if attempts_remaining <= 0:
         print(f"You ran out of attempts! The secret number was {random_number} Try again!\n\n")
 
+#Game Loop
+while True:
 #Game Setup: getting game type, difficulty, max attempts, and generating the random number
-game_type = game_selection_loop()
-difficulty = difficulty_selection_loop()
-max_attempts = ATTEMPTS_MAP[difficulty]
-if DEBUG_SECRET:
-    random_number = DEBUG_SECRET
-    print("The secret number is: ", random_number)
-else:
-    random_number = randint(1, DIFFICULTY_MAP[difficulty])
+    restart = False
+    game_type = game_selection_loop()
+    difficulty = difficulty_selection_loop()
+    max_attempts = ATTEMPTS_MAP[difficulty]
+    if DEBUG_SECRET:
+        random_number = DEBUG_SECRET
+        print("The secret number is: ", random_number)
+    else:
+        random_number = randint(1, DIFFICULTY_MAP[difficulty])
 
-if game_type == 1:
-    classic_mode(difficulty, max_attempts, random_number)
-else:
-    time_challenge_mode(difficulty, max_attempts, random_number)
+    if game_type == 1:
+        classic_mode(difficulty, max_attempts, random_number)
+    else:
+        time_challenge_mode(difficulty, max_attempts, random_number)
+    while True:
+        play_again = input("Would you like to play again? (y/n): ")
+        if play_again.lower().strip() == "y":
+            restart = True
+            break
+        elif play_again.lower().strip() == "n":
+            restart = False
+            break
+        else:
+            print("Invalid Entry! Get with the program and try again!!!\n\n")
+    if not restart:
+        break
 
 
